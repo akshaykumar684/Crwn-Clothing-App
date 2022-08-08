@@ -1,4 +1,5 @@
 import { useState } from "react";
+import FormInput from "../form-input/form-input.component";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -21,6 +22,7 @@ const SignUpForm = () => {
 
   const signUpFormSubmitHandler = async (event) => {
     event.preventDefault();
+    console.log(formFields);
 
     if (password !== confirmPassword) {
       alert("Password didnot match");
@@ -48,32 +50,33 @@ const SignUpForm = () => {
     <div>
       <h1>Sign up with your email and password</h1>
       <form onSubmit={signUpFormSubmitHandler}>
-        <label>Display Name</label>
-        <input
+        <FormInput
+          label="Display Name"
           type="text"
           value={displayName}
           name="displayName"
           onChange={formInputChangeHandler}
           required
         />
-        <label>Email</label>
-        <input
+        <FormInput
+          label="Email"
           type="email"
           value={email}
           name="email"
           onChange={formInputChangeHandler}
           required
         />
-        <label>Password</label>
-        <input
+
+        <FormInput
+          label="Password"
           type="password"
           value={password}
           name="password"
           onChange={formInputChangeHandler}
           required
         />
-        <label>Confirm Password</label>
-        <input
+        <FormInput
+          label="Confirm Password"
           type="password"
           value={confirmPassword}
           name="confirmPassword"
