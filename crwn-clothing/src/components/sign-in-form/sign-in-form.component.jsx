@@ -1,3 +1,4 @@
+import "./sign-in-form.styles.scss";
 import { useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
@@ -37,7 +38,13 @@ const SignInForm = () => {
       console.log(response);
       resetFormFields();
     } catch (error) {
-      console.log(error);
+      if (error.code === "auth/wrong-password") {
+        alert("incorrect password for email");
+      } else if (error.code === "auth/user-not-found") {
+        alert("invalid email");
+      } else {
+        console.log(error);
+      }
     }
   };
 
@@ -67,11 +74,17 @@ const SignInForm = () => {
           onChange={formInputChangeHandler}
           required
         />
-        <Button type="submit">Sign In</Button>
+        <div className="buttons-container">
+          <Button type="submit">Sign In</Button>
+          <Button
+            type="button"
+            buttonType="google"
+            onClick={logInWithGoogleHandler}
+          >
+            Google Sign In
+          </Button>
+        </div>
       </form>
-      <Button buttonType="google" onClick={logInWithGoogleHandler}>
-        Google Sign In
-      </Button>
     </div>
   );
 };
