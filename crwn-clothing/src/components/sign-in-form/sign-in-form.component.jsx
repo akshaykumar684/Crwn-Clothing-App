@@ -20,6 +20,7 @@ const SignInForm = () => {
   const { setCurrentUser } = useContext(UserContext);
   const logInWithGoogleHandler = async () => {
     const { user } = await signInWithGooglePopup();
+    setCurrentUser(user);
     //const userDocRef = await createUserDocumentFromAuth(user);
     await createUserDocumentFromAuth(user);
   };
